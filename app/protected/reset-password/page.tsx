@@ -1,37 +1,53 @@
 import { resetPasswordAction } from "@/app/actions";
-import { FormMessage, Message } from "@/components/form-message";
-import { SubmitButton } from "@/components/submit-button";
+import { FormMessage, type Message } from "@/components/form-message";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
-export default async function ResetPassword(props: {
-  searchParams: Promise<Message>;
+export default async function ResetPasswordPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const searchParams = await props.searchParams;
+  // Create Supabase client
+  const supabase = await createClient();
+
+  // Get user session
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    // If no user is logged in, redirect to login
+    redirect("/sign-in");
+  }
+
+  // Await the searchParams promise
+  const resolvedSearchParams = await searchParams;
+
+  const message: Message | undefined = 
+    typeof resolvedSearchParams.message === 'string' ? { message: resolvedSearchParams.message } :
+    typeof resolvedSearchParams.error === 'string' ? { error: resolvedSearchParams.error } :
+    typeof resolvedSearchParams.success === 'string' ? { success: resolvedSearchParams.success } :
+    undefined;
+
   return (
-    <form className="flex flex-col w-full max-w-md p-4 gap-2 [&>input]:mb-4">
-      <h1 className="text-2xl font-medium">Reset password</h1>
-      <p className="text-sm text-foreground/60">
-        Please enter your new password below.
-      </p>
-      <Label htmlFor="password">New password</Label>
-      <Input
-        type="password"
-        name="password"
-        placeholder="New password"
-        required
-      />
-      <Label htmlFor="confirmPassword">Confirm password</Label>
-      <Input
-        type="password"
-        name="confirmPassword"
-        placeholder="Confirm password"
-        required
-      />
-      <SubmitButton formAction={resetPasswordAction}>
-        Reset password
-      </SubmitButton>
-      <FormMessage message={searchParams} />
-    </form>
+    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+      <form action={resetPasswordAction}>
+        <div className="grid gap-2">
+          <Label htmlFor="password">New Password</Label>
+          <Input
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            required
+          />
+          {message && <FormMessage message={message} />}
+          <Button className="mt-4">
+            Reset Password
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }

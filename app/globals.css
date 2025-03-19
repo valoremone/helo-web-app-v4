@@ -4,58 +4,111 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --background: 222 47% 11%;
+    --foreground: 0 0% 100%;
+    --card: 222 47% 11%;
+    --card-foreground: 0 0% 100%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 217 73% 49%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8% 46%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 76% 48%;
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --chart-1: 220 71% 49%;
+    --chart-2: 0 0% 75%;
+    --chart-3: 0 0% 5%;
+    --chart-4: 220 71% 66%;
+    --chart-5: 0 0% 90%;
+    --sidebar-background: 220 71% 6%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 220 71% 49%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 71% 9%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 220 71% 9%;
+    --sidebar-ring: 220 71% 49%;
   }
 
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --background: 222 47% 11%;
+    --foreground: 0 0% 100%;
+    --card: 222 47% 11%;
+    --card-foreground: 0 0% 100%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 217 73% 49%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 215 28% 17%;
+    --muted-foreground: 217 10% 64%;
+    --accent: 215 28% 17%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 224 76% 48%;
+
+    /* HELO Brand Colors */
+    --oxford-blue-100: 220 71% 3%;
+    --oxford-blue-200: 220 71% 6%;
+    --oxford-blue-300: 220 71% 9%;
+    --oxford-blue-400: 220 71% 12%;
+    --oxford-blue-500: 220 71% 15%;
+    --oxford-blue-600: 220 71% 32%;
+    --oxford-blue-700: 220 71% 49%;
+    --oxford-blue-800: 220 71% 66%;
+    --oxford-blue-900: 220 71% 83%;
+
+    --silver-100: 0 0% 15%;
+    --silver-200: 0 0% 30%;
+    --silver-300: 0 0% 45%;
+    --silver-400: 0 0% 60%;
+    --silver-500: 0 0% 75%;
+    --silver-600: 0 0% 80%;
+    --silver-700: 0 0% 85%;
+    --silver-800: 0 0% 90%;
+    --silver-900: 0 0% 95%;
+
+    --night-100: 0 0% 1%;
+    --night-200: 0 0% 2%;
+    --night-300: 0 0% 3%;
+    --night-400: 0 0% 4%;
+    --night-500: 0 0% 5%;
+    --night-600: 0 0% 24%;
+    --night-700: 0 0% 43%;
+    --night-800: 0 0% 62%;
+    --night-900: 0 0% 81%;
+
+    /* Chart colors using brand palette */
+    --chart-1: 220 71% 49%;
+    --chart-2: 0 0% 75%;
+    --chart-3: 0 0% 5%;
+    --chart-4: 220 71% 66%;
+    --chart-5: 0 0% 90%;
+
+    /* Sidebar colors using brand palette */
+    --sidebar-background: 220 71% 6%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 220 71% 49%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 71% 9%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 220 71% 9%;
+    --sidebar-ring: 220 71% 49%;
+
+    --color-background: #0a1f44;
   }
 }
 
@@ -66,4 +119,47 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* P3 color gamut support for enhanced color display */
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    .dark {
+      --blue-1: oklch(15.9% 0.027 260.8);
+      --blue-2: oklch(20.4% 0.0326 260.8);
+      --blue-3: oklch(27% 0.0749 260.8);
+      --blue-4: oklch(31.7% 0.1025 260.8);
+      --blue-5: oklch(36.2% 0.1124 260.8);
+      --blue-6: oklch(40.6% 0.1124 260.8);
+      --blue-7: oklch(45.5% 0.1124 260.8);
+      --blue-8: oklch(51% 0.1124 260.8);
+      --blue-9: oklch(56.3% 0.1124 260.8);
+      --blue-10: oklch(51.8% 0.1124 260.8);
+      --blue-11: oklch(77.5% 0.1124 260.8);
+      --blue-12: oklch(91% 0.0472 260.8);
+  
+      --blue-a1: color(display-p3 0 0.0549 0.9922 / 0.046);
+      --blue-a2: color(display-p3 0.1686 0.4431 0.9922 / 0.1);
+      --blue-a3: color(display-p3 0.1843 0.4275 1 / 0.24);
+      --blue-a4: color(display-p3 0.1765 0.4235 1 / 0.348);
+      --blue-a5: color(display-p3 0.2353 0.4588 0.9961 / 0.422);
+      --blue-a6: color(display-p3 0.3059 0.5176 1 / 0.48);
+      --blue-a7: color(display-p3 0.3725 0.5686 1 / 0.538);
+      --blue-a8: color(display-p3 0.4314 0.6118 1 / 0.612);
+      --blue-a9: color(display-p3 0.4784 0.6431 1 / 0.682);
+      --blue-a10: color(display-p3 0.4353 0.6118 1 / 0.624);
+      --blue-a11: color(display-p3 0.6 0.7294 1 / 0.972);
+      --blue-a12: color(display-p3 0.8431 0.898 1 / 0.988);
+  
+      --blue-contrast: #fff;
+      --blue-surface: color(display-p3 0.0706 0.1255 0.2353 / 0.5);
+      --blue-indicator: oklch(56.3% 0.1124 260.8);
+      --blue-track: oklch(56.3% 0.1124 260.8);
+    }
+  }
+}
+
+/* Theme-specific background colors */
+.light {
+  --color-background: #ffffff;
 }

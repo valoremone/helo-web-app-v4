@@ -1,44 +1,87 @@
 import { signInAction } from "@/app/actions";
 import { FormMessage, Message } from "@/components/form-message";
-import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { SmtpMessage } from "../smtp-message";
+import { Plane } from "lucide-react";
 
-export default async function Login(props: { searchParams: Promise<Message> }) {
-  const searchParams = await props.searchParams;
+interface PageProps {
+  searchParams: Promise<{ message?: Message }>
+}
+
+export default async function SignInPage({ searchParams }: PageProps) {
+  const params = await searchParams;
   return (
-    <form className="flex-1 flex flex-col min-w-64">
-      <h1 className="text-2xl font-medium">Sign in</h1>
-      <p className="text-sm text-foreground">
-        Don't have an account?{" "}
-        <Link className="text-foreground font-medium underline" href="/sign-up">
-          Sign up
-        </Link>
-      </p>
-      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
-        <Label htmlFor="email">Email</Label>
-        <Input name="email" placeholder="you@example.com" required />
-        <div className="flex justify-between items-center">
-          <Label htmlFor="password">Password</Label>
-          <Link
-            className="text-xs text-foreground underline"
-            href="/forgot-password"
-          >
-            Forgot Password?
-          </Link>
-        </div>
-        <Input
-          type="password"
-          name="password"
-          placeholder="Your password"
-          required
-        />
-        <SubmitButton pendingText="Signing In..." formAction={signInAction}>
-          Sign in
-        </SubmitButton>
-        <FormMessage message={searchParams} />
-      </div>
-    </form>
+    <div className="container relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      {params?.message ? (
+        <FormMessage message={params.message} />
+      ) : (
+        <>
+          <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
+            <div className="absolute inset-0 bg-zinc-900" />
+            <div className="relative z-20 flex items-center text-lg font-medium">
+              <Plane className="mr-2 h-6 w-6" />
+              HELO
+            </div>
+            <div className="relative z-20 mt-auto">
+              <blockquote className="space-y-2">
+                <p className="text-lg">
+                  "HELO redefines luxury travel with unparalleled convenience and sophistication. Our exclusive membership opens doors to a world of premium air mobility."
+                </p>
+                <footer className="text-sm">James Chen, Executive Member</footer>
+              </blockquote>
+            </div>
+          </div>
+          <div className="lg:p-8">
+            <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+              <div className="flex flex-col space-y-2 text-center">
+                <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
+                <p className="text-sm text-muted-foreground">
+                  Sign in to your account to continue
+                </p>
+              </div>
+              <form action={signInAction}>
+                <div className="grid gap-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      placeholder="name@example.com"
+                      type="email"
+                      autoCapitalize="none"
+                      autoComplete="email"
+                      autoCorrect="off"
+                      required
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                      id="password"
+                      name="password"
+                      type="password"
+                      placeholder="••••••••"
+                      autoComplete="current-password"
+                      required
+                    />
+                  </div>
+                  <Button className="w-full">Sign In</Button>
+                </div>
+              </form>
+              <p className="px-8 text-center text-sm text-muted-foreground">
+                Don't have an account?{" "}
+                <Link href="/sign-up" className="underline hover:text-foreground">
+                  Sign Up
+                </Link>
+              </p>
+              <SmtpMessage />
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 }

@@ -1,0 +1,127 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.
+# HELO Luxury Air Mobility – Cursor Project Standards & Rules
+
+This document outlines the coding, design, and project management standards to be followed during the development of the HELO investor demo web apps using Next.js, shadcn/ui, Tailwind CSS v4, and Supabase. All team members working on the project must adhere to these rules to maintain high quality, consistency, and efficiency.
+
+---
+
+## 1. Code Structure & Organization
+
+- **Project Structure:**
+  - Follow the agreed-upon folder hierarchy:
+    ```
+    /src
+      /components      # Reusable UI components
+      /features        # Feature-specific modules (e.g., booking, membership)
+      /layouts         # Shared layout components (AuthLayout, MemberLayout, AdminLayout)
+      /pages           # Next.js pages for routing
+      /services        # API service functions (Supabase, authentication, etc.)
+      /store           # Global state management (Redux Toolkit or Context API)
+      /styles          # Tailwind CSS configuration and custom styles
+      /hooks           # Custom React hooks
+    ```
+- **File Naming:**
+  - Use PascalCase for React component files (e.g., `MemberDashboard.tsx`).
+  - Use kebab-case for utility and helper files (e.g., `api-service.ts`).
+- **Code Comments & Documentation:**
+  - All components, functions, and complex logic must include clear inline comments.
+  - Each module should have a README.md explaining its purpose and usage.
+
+---
+
+## 2. UI/UX & Design Standards
+
+- **Component Library:**
+  - Utilize shadcn UI components exclusively. Import all required components as per the project needs.
+- **Styling:**
+  - Use Tailwind CSS v4 for all styling. Adhere strictly to the design system and ensure consistency in spacing, colors, and typography.
+  - Follow HELO’s branding guidelines:
+    - { 'oxford_blue': { DEFAULT: '#0a1f44', 100: '#02060d', 200: '#040c1b', 300: '#061228', 400: '#081935', 500: '#0a1f44', 600: '#15418e', 700: '#2064d9', 800: '#6897e8', 900: '#b4cbf4' }, 'silver': { DEFAULT: '#c0c0c0', 100: '#262626', 200: '#4d4d4d', 300: '#737373', 400: '#999999', 500: '#c0c0c0', 600: '#cccccc', 700: '#d9d9d9', 800: '#e6e6e6', 900: '#f2f2f2' }, 'night': { DEFAULT: '#0d0d0d', 100: '#030303', 200: '#050505', 300: '#080808', 400: '#0a0a0a', 500: '#0d0d0d', 600: '#3d3d3d', 700: '#6e6e6e', 800: '#9e9e9e', 900: '#cfcfcf' }, 'white': { DEFAULT: '#ffffff', 100: '#333333', 200: '#666666', 300: '#999999', 400: '#cccccc', 500: '#ffffff', 600: '#ffffff', 700: '#ffffff', 800: '#ffffff', 900: '#ffffff' } }
+    - Maintain a dark luxury and modern aesthetic throughout the UI.
+- **Responsiveness & Accessibility:**
+  - Ensure that all pages and components are fully responsive across desktop, tablet, and mobile devices.
+  - Adhere to accessibility best practices (e.g., proper ARIA labels, keyboard navigation).
+- **HELO Website**
+  - Reference the HELO website whenever necesarry to get information, images, & style references at `https://flyhelo.one`
+---
+
+## 3. Functionality & Feature Implementation
+
+- **Authentication:**
+  - Use Supabase for authentication and data storage.
+  - Implement SSO (Google and Apple) along with manual registration.
+  - Ensure SMS and email verification flows are active.
+  - Test users must be created with the following emails:
+    - Admin: `admin@flyhelo.one`
+    - Member: `member@flyhelo.one`
+- **Booking System:**
+  - Implement flight booking functionality with both one-way and roundtrip options.
+  - Include detailed forms for passenger information (name, DOB, weight, photo ID upload).
+  - Integrate ground transportation booking (black car service) with auto-suggestions.
+  - Display dynamic pricing and membership discount calculations.
+- **Notifications & Digital Passes:**
+  - Integrate push notifications and real-time alerts.
+  - Enable Apple Wallet pass generation with QR code integration for bookings.
+- **Admin Dashboard:**
+  - Provide full control for admin users to manage bookings, users, fleet data, and notifications.
+  - Implement search, filtering, and report generation features for comprehensive oversight.
+- **Concierge Chat:**
+  - Build an in-app chat interface to simulate real-time concierge support.
+
+---
+
+## 4. API & Backend Integration
+
+- **Supabase Integration:**
+  - Use Supabase for database management, authentication, and real-time data updates.
+  - Ensure that all API calls (using Axios or Fetch) are modular and well-documented.
+- **Mock Data:**
+  - For demo purposes, create mock endpoints if the full backend isn’t available.
+- **Error Handling:**
+  - Implement robust error handling and loading states for all API interactions.
+
+---
+
+## 5. Development Practices & Version Control
+
+- **Code Reviews:**
+  - All code must go through a peer review process before merging into the main branch.
+- **Commit Standards:**
+  - Use clear and descriptive commit messages.
+  - Follow conventional commit guidelines where possible.
+- **Branching:**
+  - Use feature branches for new functionalities. Merge only after thorough testing.
+- **Testing:**
+  - Write unit and integration tests for key components and services.
+  - Ensure that test users (`admin@flyhelo.one` and `member@flyhelo.one`) are included in test cases.
+
+---
+
+## 6. Deployment & Continuous Integration
+
+- **Deployment:**
+  - Deploy the web apps on Vercel from GitHub. Ensure that deployment scripts and environment configurations are correctly set.
+- **CI/CD:**
+  - Leverage Cursor.ai’s integration features to set up automated testing and deployment pipelines.
+- **Monitoring:**
+  - Use basic logging and error tracking (e.g., Sentry) during development and demo phases.
+
+---
+
+## 7. Collaboration & Communication
+
+- **Cursor.ai Workflow:**
+  - Import this project into Cursor.ai and break down tasks according to the feature list.
+  - Use Cursor.ai’s task management and collaboration tools to assign responsibilities and track progress.
+- **Documentation:**
+  - Maintain comprehensive documentation within the project repository.
+  - Update documentation with any changes or new features as they are implemented.
+
+---
+
+These rules and standards are designed to ensure that the HELO web apps meet the highest quality, design, and functional standards, and that the project remains maintainable, scalable, and aligned with the luxury brand identity.
