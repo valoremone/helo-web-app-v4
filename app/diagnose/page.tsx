@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { SupabaseStatus } from '@/components/supabase-status'
 import { ArrowLeft } from 'lucide-react'
+import { AlternativeHomeButton } from '@/components/alternative-home-button'
+import { HomeButton } from '@/components/home-button'
 
 export default function DiagnosePage() {
   return (
@@ -51,14 +53,12 @@ export default function DiagnosePage() {
             </Link>
           </Button>
           
-          {/* Fallback button using plain HTML for production issues */}
-          <Button 
-            variant="secondary" 
-            onClick={() => window.location.href = '/'}
-            className="sm:ml-2"
-          >
-            Alternative Home Button
-          </Button>
+          {/* Using client component for interactive button */}
+          <AlternativeHomeButton />
+        </div>
+        
+        <div className="mt-4 flex justify-center">
+          <HomeButton />
         </div>
       </div>
     </div>
