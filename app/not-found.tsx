@@ -19,6 +19,11 @@ export default function NotFound() {
             </Link>
           </Button>
         </div>
+        <div className="mt-4">
+          <Button variant="link" asChild size="sm" className="text-sm">
+            <Link href="/diagnose">Run Diagnostics</Link>
+          </Button>
+        </div>
       </div>
     </div>
   );
