@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { GeistSans } from 'geist/font/sans'
+import { Home } from 'lucide-react'
 
 export default function GlobalError({ error }) {
   useEffect(() => {
@@ -29,6 +30,15 @@ export default function GlobalError({ error }) {
           <div className="mt-4">
             <Button variant="link" onClick={() => window.location.href = '/diagnose'} className="text-sm">
               Run Diagnostics
+            </Button>
+          </div>
+          <div className="mt-4">
+            <Button 
+              variant="outline"
+              onClick={() => window.location.href = '/'}
+            >
+              <Home className="mr-2 h-4 w-4" />
+              Return to Home
             </Button>
           </div>
           {process.env.NODE_ENV === 'development' && (

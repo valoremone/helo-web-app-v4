@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { HomeButton } from '@/components/home-button'
 
 export default function Error({ error, reset }) {
   useEffect(() => {
@@ -23,13 +24,16 @@ export default function Error({ error, reset }) {
         <div className="mt-10 flex space-x-4 justify-center">
           <Button onClick={() => reset()}>Try Again</Button>
           <Button variant="outline" asChild>
-            <Link href="/">Go Home</Link>
+            <Link href="/" prefetch={false}>Go Home</Link>
           </Button>
         </div>
         <div className="mt-4">
           <Button variant="link" asChild size="sm" className="text-sm">
-            <Link href="/diagnose">Run Diagnostics</Link>
+            <Link href="/diagnose" prefetch={false}>Run Diagnostics</Link>
           </Button>
+        </div>
+        <div className="mt-4">
+          <HomeButton />
         </div>
         {process.env.NODE_ENV === 'development' && (
           <div className="mt-8 p-4 bg-muted text-left rounded-md overflow-auto max-h-64">

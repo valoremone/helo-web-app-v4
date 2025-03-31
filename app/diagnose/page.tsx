@@ -43,12 +43,21 @@ export default function DiagnosePage() {
           </div>
         </div>
 
-        <div className="pt-6">
+        <div className="pt-6 flex flex-col sm:flex-row gap-4 items-center justify-center">
           <Button asChild variant="outline">
-            <Link href="/">
+            <Link href="/" prefetch={false}>
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Home
             </Link>
+          </Button>
+          
+          {/* Fallback button using plain HTML for production issues */}
+          <Button 
+            variant="secondary" 
+            onClick={() => window.location.href = '/'}
+            className="sm:ml-2"
+          >
+            Alternative Home Button
           </Button>
         </div>
       </div>

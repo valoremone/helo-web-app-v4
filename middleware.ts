@@ -61,12 +61,18 @@ export async function middleware(request: NextRequest) {
     const { data: { user }, error } = await supabase.auth.getUser();
 
     // If we got an error trying to get the user, redirect to the diagnose page
+    // unless we're already on diagnose, home, or other public pages
     if (error) {
       console.error('Auth error in middleware:', error.message);
-      // Handle specific auth errors here if needed
-      if (request.nextUrl.pathname !== '/diagnose') {
+      
+      // Don't redirect if currently on diagnose page, home page, or trying to access them
+      const publicPaths = ['/diagnose', '/', '/sign-in', '/sign-up'];
+      const currentPath = request.nextUrl.pathname;
+      
+      if (!publicPaths.some(path => currentPath === path || currentPath.startsWith(path + '/'))) {
         return NextResponse.redirect(new URL('/diagnose', request.url));
       }
+      
       return response;
     }
 
@@ -115,8 +121,9 @@ export async function middleware(request: NextRequest) {
   } catch (err) {
     console.error('Unexpected error in middleware:', err);
     
-    // Only redirect to diagnose if not already there to prevent redirect loops
-    if (request.nextUrl.pathname !== '/diagnose') {
+    // Only redirect to diagnose if not already there and not going to home to prevent redirect loops
+    const safePathsForErrors = ['/diagnose', '/'];
+    if (!safePathsForErrors.includes(request.nextUrl.pathname)) {
       return NextResponse.redirect(new URL('/diagnose', request.url));
     }
     
