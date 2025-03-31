@@ -74,7 +74,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false)
       return () => {}
     }
-  }, [])
+  }, [supabase.auth])
 
   const signOut = async () => {
     try {

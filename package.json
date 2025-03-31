@@ -44,6 +44,8 @@
     "@types/node": "22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "19.0.2",
+    "eslint": "9.23.0",
+    "eslint-config-next": "15.2.4",
     "postcss": "8.4.49",
     "supabase": "^2.19.7",
     "tailwind-merge": "^2.6.0",

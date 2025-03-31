@@ -20,22 +20,49 @@ export const signUpAction = async (formData: FormData) => {
     );
   }
 
-  const { error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      emailRedirectTo: `${origin}/auth/callback`,
-    },
-  });
+  try {
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${origin}/auth/callback`,
+      },
+    });
 
-  if (error) {
-    console.error(error.code + " " + error.message);
-    return encodedRedirect("error", "/sign-up", error.message);
-  } else {
+    if (error) {
+      console.error(error.code + " " + error.message);
+      
+      const isAuthServiceError = 
+        error.message?.includes('upstream') || 
+        error.message?.includes('invalid response') ||
+        error.message?.includes('auth service') ||
+        error.message?.includes('migration') ||
+        error.status === 500;
+        
+      // Special handling for potential Supabase reactivation issues
+      if (isAuthServiceError) {
+        return encodedRedirect(
+          "error",
+          "/sign-up",
+          "Authentication service error. Your Supabase project may have been recently reactivated. Please visit the diagnostic page to reset your auth state."
+        );
+      }
+      
+      return encodedRedirect("error", "/sign-up", error.message);
+    } else {
+      return encodedRedirect(
+        "success",
+        "/sign-up",
+        "Thanks for signing up! Please check your email for a verification link.",
+      );
+    }
+  } catch (error: unknown) {
+    console.error("Unexpected sign-up error:", error);
+    const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
     return encodedRedirect(
-      "success",
+      "error",
       "/sign-up",
-      "Thanks for signing up! Please check your email for a verification link.",
+      errorMessage
     );
   }
 };
@@ -50,14 +77,33 @@ export const signInAction = async (formData: FormData) => {
     password: formData.get("password") as string,
   };
 
-  const { error } = await supabase.auth.signInWithPassword(data);
+  try {
+    const { error } = await supabase.auth.signInWithPassword(data);
 
-  if (error) {
-    return redirect("/sign-in?message=Invalid email or password");
+    if (error) {
+      const isAuthServiceError = 
+        error.message?.includes('upstream') || 
+        error.message?.includes('invalid response') ||
+        error.message?.includes('auth service') ||
+        error.message?.includes('migration') ||
+        error.status === 500;
+        
+      // Special handling for potential Supabase reactivation issues
+      if (isAuthServiceError) {
+        console.error("Potential Supabase reactivation issue:", error.message);
+        return redirect(`/sign-in?error=${encodeURIComponent("Authentication service error. Your Supabase project may have been recently reactivated. Please try resetting your auth state.")}`);
+      }
+      
+      return redirect(`/sign-in?error=${encodeURIComponent(error.message)}`);
+    }
+
+    revalidatePath("/", "layout");
+    redirect("/protected");
+  } catch (error: unknown) {
+    console.error("Unexpected sign-in error:", error);
+    const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+    return redirect(`/sign-in?error=${encodeURIComponent(errorMessage)}`);
   }
-
-  revalidatePath("/", "layout");
-  redirect("/protected");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {
@@ -98,7 +144,10 @@ export const resetPasswordAction = async (formData: FormData) => {
   const supabase = await createClient();
 
   const password = formData.get("password") as string;
-  const confirmPassword = formData.get("confirmPassword") as string;
+  // We're capturing confirmPassword but not using it directly in this function
+  // It's typically validated client-side or could be used for additional validation
+  // Including the type to document the expected form field
+  const _confirmPassword = formData.get("confirmPassword") as string;
 
   if (!password) {
     return encodedRedirect(
