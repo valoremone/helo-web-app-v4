@@ -72,9 +72,14 @@ export default async function SignInPage({ searchParams }: PageProps) {
                 </div>
               </form>
               <p className="px-8 text-center text-sm text-muted-foreground">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link href="/sign-up" className="underline hover:text-foreground">
                   Sign Up
+                </Link>
+              </p>
+              <p className="px-8 text-center text-sm text-muted-foreground">
+                <Link href="/forgot-password" className="underline hover:text-foreground">
+                  Forgot your password?
                 </Link>
               </p>
               <SmtpMessage />
